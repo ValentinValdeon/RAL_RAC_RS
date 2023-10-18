@@ -15,16 +15,15 @@ typedef struct RAC{
     int cantCeldas;
 }RAC;
 
-RAC initRAC(){
-    RAC rac;
+void initRAC(RAC *rac){
     int i;
 
     for (i =0;i < RAC_FACTOR;i++ ){
-        rac.estructura[i].isVirgen=-1;
-        strcpy(rac.estructura[i].env.codigo,"z");
+        (*rac).estructura[i].isVirgen=-1;
+        strcpy((*rac).estructura[i].env.codigo,"z");
     }
 
-    rac.cantCeldas =0;
+    (*rac).cantCeldas =0;
 
     return rac;
 }
@@ -81,6 +80,7 @@ int altaRAC(RAC *rac,envio env){
         return 0;
     }else if (exito == 0){
         (*rac).estructura[pos].env = env;
+        (*rac).estructura[pos].isVirgen = 1;
         return 1;
     }else{
         return -1;

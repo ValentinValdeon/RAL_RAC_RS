@@ -15,16 +15,16 @@ typedef struct RAL{
     int cantCeldas;
 }RAL;
 
-RAL initRAL(){
-    RAL ral;
+void initRAL(RAL *ral){
+
     int i;
 
     for (i =0;i < RAL_FACTOR;i++ ){
-        ral.estructura[i].isVirgen=-1;
-        strcpy(ral.estructura[i].env.codigo,"z");
+        (*ral).estructura[i].isVirgen=-1;
+        strcpy((*ral).estructura[i].env.codigo,"z");
     }
 
-    ral.cantCeldas =0;
+    (*ral).cantCeldas =0;
 
     return ral;
 }
@@ -79,6 +79,7 @@ int altaRAL(RAL *ral,envio env){
         return 0;
     }else if (exito == 0){
         (*ral).estructura[pos].env = env;
+        (*ral).estructura[pos].isVirgen = 1;
         return 1;
     }else{
         return -1;

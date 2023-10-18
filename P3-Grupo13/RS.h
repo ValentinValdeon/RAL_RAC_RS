@@ -27,17 +27,16 @@ celdaRS *initCelda(envio envAux){
     return n;
 }
 
-RS initRS(){
-	RS rs;
+void initRS(RS *rs){
 	int i;
 
 	for(i = 0; i < RS_FACTOR; i++){
-		rs.estructura[i] = NULL;
+		(*rs).estructura[i] = NULL;
 	}
 
-	rs.actual = NULL;
-	rs.anterior = NULL;
-	rs.cant = 0;
+	(*rs).actual = NULL;
+	(*rs).anterior = NULL;
+	(*rs).cant = 0;
 
 	return rs;
 }
