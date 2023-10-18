@@ -272,3 +272,34 @@
 	"envios.h"
 	<malloc.h>
 
+1697594839 source:e:\educacion\2do\segundo cuatrimentre\eda\labs\ral_rac_rs\p3-grupo13\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"string.h"
+	"envios.h"
+	"RAC.h"
+	"RAL.h"
+	"RS.h"
+
+1697588863 e:\educacion\2do\segundo cuatrimentre\eda\labs\ral_rac_rs\p3-grupo13\envios.h
+
+1697588863 e:\educacion\2do\segundo cuatrimentre\eda\labs\ral_rac_rs\p3-grupo13\lso.h
+	"envios.h"
+
+1697588863 e:\educacion\2do\segundo cuatrimentre\eda\labs\ral_rac_rs\p3-grupo13\lsobb.h
+	"envios.h"
+	"math.h"
+
+1697588863 e:\educacion\2do\segundo cuatrimentre\eda\labs\ral_rac_rs\p3-grupo13\abb.h
+	<string.h>
+	<conio.h>
+	"envios.h"
+	<malloc.h>
+
+1697592935 e:\educacion\2do\segundo cuatrimentre\eda\labs\ral_rac_rs\p3-grupo13\rac.h
+
+1697593007 e:\educacion\2do\segundo cuatrimentre\eda\labs\ral_rac_rs\p3-grupo13\ral.h
+
+1697591357 e:\educacion\2do\segundo cuatrimentre\eda\labs\ral_rac_rs\p3-grupo13\rs.h
+

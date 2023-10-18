@@ -1,6 +1,8 @@
 #ifndef RS_H_INCLUDED
 #define RS_H_INCLUDED
-#define RS_FACTOR
+#define RS_FACTOR 211
+
+int maxRSEvocEx=0,costRSEvocEx=0,cantRSEvocEx=0,maxRSEvocFr=0,costRSEvocFr=0,cantRSEvocFr=0;
 
 typedef struct celdaRS{
 	envio envio;
@@ -8,7 +10,7 @@ typedef struct celdaRS{
 }celdaRS;
 
 typedef struct RS{
-	celdaRS *estructura[RS_FACTOR];
+	celdaRS *estructura[211];
 	celdaRS *anterior;
 	celdaRS *actual;
 	int cant;
@@ -41,7 +43,7 @@ RS initRS(){
 }
 
 //HASH
-int hashing(char *x, int M){
+int hashingRS(char *x){
     int longitud,i;
     int contador = 0;
 
@@ -49,8 +51,10 @@ int hashing(char *x, int M){
     for(i=0; i<longitud; i++)
         contador += ((int)x[i]) * (i+1);
 
-    return (contador % M);
+    return (contador % RS_FACTOR);
 }
+
+
 
 
 #endif // RS_H_INCLUDED

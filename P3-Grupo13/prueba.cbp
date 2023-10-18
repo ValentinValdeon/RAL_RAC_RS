@@ -31,12 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="ABB.h" />
-		<Unit filename="LSO.h">
+		<Unit filename="RAC.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="LSOBB.h" />
-		<Unit filename="RAC.h">
+		<Unit filename="RAL.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="RS.h">
@@ -48,10 +46,6 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
-		</Extensions>
+		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
