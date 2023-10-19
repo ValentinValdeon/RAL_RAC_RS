@@ -2,7 +2,7 @@
 #define RAC_H_INCLUDED
 #define RAC_FACTOR 401
 
-int maxRACEvocEx=0,costRACEvocEx=0,cantRACEvocEx=0,maxRACEvocFr=0,costRACEvocFr=0,cantRACEvocFr=0;
+float maxRACEvocEx=0.0,costRACEvocEx=0.0,cantRACEvocEx=0.0,maxRACEvocFr=0.0,costRACEvocFr=0.0,cantRACEvocFr=0.0;
 
 typedef struct celdaRAC{
     envio env;
@@ -42,34 +42,52 @@ int hashingRAC(char *x){
 
 
 int localizarRAC(char cod[], RAC *rac, int *pos, int accion){
-
+    int auxcost = 0;
 	int i = hashingRAC(cod);
 	int bandera = -1;
-	int k = 1;
+	int k = 0;
 	int iteraciones = 0;//controla si vi o no todas las M celdas
 
 	while((iteraciones < RAC_FACTOR) && ((*rac).estructura[i].isVirgen != -1) && strcmp(cod,(*rac).estructura[i].env.codigo)!=0){
-        if((*rac).estructura[i].isVirgen == 0 && bandera == -1)
+        if((*rac).estructura[i].isVirgen == 0 && bandera == -1){
             bandera = i;
-
+        }
+        if(accion = 1){
+            auxcost++;
+        }
         i = (i+k) % RAC_FACTOR;
 		k++;
         iteraciones++;
 	}
-
 	if(strcmp(cod,(*rac).estructura[i].env.codigo)==0){
+        if(maxRACEvocEx < auxcost){
+            maxRACEvocEx = auxcost;
+        }
+        if(accion==1){
+            cantRACEvocEx +=1;
+            costRACEvocEx += auxcost;
+        }
         (*pos) = i;
         return 1;
 	}
 	else{
+        if(maxRACEvocFr < auxcost){
+            maxRACEvocFr = auxcost;
+        }
+        if(accion==1){
+            cantRACEvocFr +=1;
+            costRACEvocFr += auxcost;
+        }
         if(bandera != -1){
             (*pos) = bandera;
+            return 0;
         }else if((*rac).estructura[i].isVirgen == -1){
             (*pos) = i;
+            return 0;
         }else if((*rac).estructura[i].isVirgen != -1 && bandera == -1){
             return -1;//la estructura esta llena
         }
-        return 0;
+
 	}
 }
 
@@ -96,6 +114,7 @@ int bajaRAC(RAC *rac,envio env){
         if(strcmpi((*rac).estructura[pos].env.codigo,env.codigo)==0 && strcmpi((*rac).estructura[pos].env.nomyapeRemi,env.nomyapeRemi)==0 && strcmpi((*rac).estructura[pos].env.nomyapeRece,env.nomyapeRece)==0 &&
            strcmpi((*rac).estructura[pos].env.domicilioRece,env.domicilioRece)==0 && strcmpi((*rac).estructura[pos].env.fechaEnv,env.fechaEnv)==0 && strcmpi((*rac).estructura[pos].env.fechaRece,env.fechaRece)==0 &&
            (*rac).estructura[pos].env.documentoRece == env.documentoRece && (*rac).estructura[pos].env.documentoRemi == env.documentoRemi){
+                strcpy((*rac).estructura[pos].env.codigo,"z");//Codigo borrado
                 (*rac).estructura[pos].isVirgen = 0;
                 return 1;
            }else{
