@@ -52,14 +52,17 @@ int localizarRAC(char cod[], RAC *rac, int *pos, int accion){
         if((*rac).estructura[i].isVirgen == 0 && bandera == -1){
             bandera = i;
         }
-        if(accion = 1){
+        if(accion == 1){
             auxcost++;
         }
-        i = (i+k) % RAC_FACTOR;
 		k++;
+		i = (i+k) % RAC_FACTOR;
         iteraciones++;
 	}
 	if(strcmp(cod,(*rac).estructura[i].env.codigo)==0){
+	    if(accion == 1){
+            auxcost++;
+        }
         if(maxRACEvocEx < auxcost){
             maxRACEvocEx = auxcost;
         }
@@ -71,6 +74,9 @@ int localizarRAC(char cod[], RAC *rac, int *pos, int accion){
         return 1;
 	}
 	else{
+	    if(accion == 1){
+            auxcost++;
+        }
         if(maxRACEvocFr < auxcost){
             maxRACEvocFr = auxcost;
         }

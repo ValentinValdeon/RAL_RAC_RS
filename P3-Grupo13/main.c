@@ -10,14 +10,14 @@
 //MARIANO ARBELOA GUGLIELMINO
 //VALENTIN VALDEON
 /*
-----------------------------------------------------------------------------------------
+ ----------------------------------------------------------------------------------------
        | Max. Evocar Exito | Med. Evocar Exito | Max Evocar Fracaso | Med Evocar Fracaso|
  ----------------------------------------------------------------------------------------
-  RAL  |       11.00       |       2.06        |        18.00       |        6.50       |
+  RAL  |       12.00       |       3.40        |        19.00       |        7.43       |
  ----------------------------------------------------------------------------------------
-  RAC  |        7.00       |       1.27        |        11.00       |        3.61       |
+  RAC  |        7.00       |       1.72        |        11.00       |        3.56       |
  ----------------------------------------------------------------------------------------
-  RS   |        4.00       |       1.62        |        4.00        |        1.40       |
+  RS   |        5.00       |       2.29        |        5.00        |        2.38       |
  ----------------------------------------------------------------------------------------
 Considerando las estructuras seleccionadas en esta ocasión y teniendo los resultados reflejados en nuestra tabla, podemos afirmar que,
 en términos de costos en función de las celdas consultadas, la mejor opción para abordar este problema es el Rebalse Separado, ya que
@@ -212,7 +212,7 @@ void mostrarRAL(RAL ral){
     if(vacio == RAL_FACTOR){
         printf("No existen envios cargados");
     }else{
-        for(i=0;i<=RAL_FACTOR;i++){
+        for(i=0;i<RAL_FACTOR;i++){
             if(ral.estructura[i].isVirgen == -1){
                 printf("\n---------------------------------------------------------------");
                 printf("\n%d",i);
@@ -257,7 +257,7 @@ void mostrarRS(RS rs){
     if(vacio == RS_FACTOR){
         printf("No existen envios cargados");
     }else{
-        for(i=0;i<=RS_FACTOR;i++){
+        for(i=0;i<RS_FACTOR;i++){
             if(rs.estructura[i].acc == NULL){
                 printf("\n---------------------------------------------------------------");
                 printf("\n%d",i);

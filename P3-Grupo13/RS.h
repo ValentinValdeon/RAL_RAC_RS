@@ -66,26 +66,33 @@ int localizarRS(char cod[], RS *rs, int *pos, int accion){
     while((*rs).actual!=NULL && strcmp(cod,(*rs).actual->envio.codigo)!=0){
         (*rs).anterior=(*rs).actual;
         (*rs).actual=(*rs).actual->siguiente;
-        if(accion = 1){
+        if(accion == 1){
             auxcost++;
         }
     }
     if((*rs).actual==NULL){
-        if(maxRSEvocEx < auxcost){
-            maxRSEvocEx = auxcost;
+        if(accion == 1){
+            auxcost++;
         }
-        if(accion==1){
-            cantRSEvocEx +=1;
-            costRSEvocEx += auxcost;
-        }
-        return 0;
-    }else{
         if(maxRSEvocFr < auxcost){
             maxRSEvocFr = auxcost;
         }
         if(accion==1){
             cantRSEvocFr +=1;
             costRSEvocFr += auxcost;
+        }
+
+        return 0;
+    }else{
+        if(accion == 1){
+            auxcost++;
+        }
+        if(maxRSEvocEx < auxcost){
+            maxRSEvocEx = auxcost;
+        }
+        if(accion==1){
+            cantRSEvocEx +=1;
+            costRSEvocEx += auxcost;
         }
         return 1;
     }
@@ -113,17 +120,23 @@ int bajaRS(RS *rs, envio env) {
     int pos;
     int exito = localizarRS(env.codigo,rs,&pos,0);
     if (exito == 1) {
-        if ((*rs).estructura[pos].acc == (*rs).actual) {
-            (*rs).estructura[pos].acc = (*rs).actual->siguiente;
-            free((void *) (*rs).actual);
-            (*rs).actual = (*rs).estructura[pos].acc;
-            (*rs).anterior = (*rs).estructura[pos].acc;
-        } else {
-            (*rs).anterior->siguiente = (*rs).actual->siguiente;
-            free((void *) (*rs).actual);
-            (*rs).actual = (*rs).actual->siguiente;
+        if(strcmpi((*rs).actual->envio.codigo,env.codigo)==0 && strcmpi((*rs).actual->envio.nomyapeRemi,env.nomyapeRemi)==0 && strcmpi((*rs).actual->envio.nomyapeRece,env.nomyapeRece)==0 &&
+           strcmpi((*rs).actual->envio.domicilioRece,env.domicilioRece)==0 && strcmpi((*rs).actual->envio.fechaEnv,env.fechaEnv)==0 && strcmpi((*rs).actual->envio.fechaRece,env.fechaRece)==0 &&
+           (*rs).actual->envio.documentoRece == env.documentoRece && (*rs).actual->envio.documentoRemi == env.documentoRemi){
+            if ((*rs).estructura[pos].acc == (*rs).actual) {
+                (*rs).estructura[pos].acc = (*rs).actual->siguiente;
+                free((void *) (*rs).actual);
+                (*rs).actual = (*rs).estructura[pos].acc;
+                (*rs).anterior = (*rs).estructura[pos].acc;
+            } else {
+                (*rs).anterior->siguiente = (*rs).actual->siguiente;
+                free((void *) (*rs).actual);
+                (*rs).actual = (*rs).actual->siguiente;
+            }
+            return 1;
+        }else{
+            return 0;
         }
-        return 1;
     }else{
         return 0;
     }

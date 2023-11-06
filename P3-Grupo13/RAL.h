@@ -51,15 +51,18 @@ int localizarRAL(char cod[], RAL *ral, int *pos, int accion){
         if((*ral).estructura[i].isVirgen == 0 && bandera == -1){
             bandera = i;
         }
-        if(accion = 1){
+        if(accion == 1){
             auxcost++;
         }
-        i = i % RAL_FACTOR;
         i++;
+        i = i % RAL_FACTOR;
         iteraciones++;
 	}
 
 	if(strcmp(cod,(*ral).estructura[i].env.codigo)==0){
+        if(accion == 1){
+            auxcost++;
+        }
         if(maxRALEvocEx < auxcost){
             maxRALEvocEx = auxcost;
         }
@@ -71,6 +74,9 @@ int localizarRAL(char cod[], RAL *ral, int *pos, int accion){
         return 1;
 	}
 	else{
+	    if(accion == 1){
+            auxcost++;
+        }
 	    if(maxRALEvocFr < auxcost){
             maxRALEvocFr = auxcost;
         }
