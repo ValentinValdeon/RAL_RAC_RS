@@ -62,7 +62,6 @@ int localizarRS(char cod[], RS *rs, int *pos, int accion){
     int i = hashingRS(cod);
     (*pos)=i;
     (*rs).actual=(*rs).estructura[i].acc;
-    auxcost++;
     while((*rs).actual!=NULL && strcmp(cod,(*rs).actual->envio.codigo)!=0){
         (*rs).anterior=(*rs).actual;
         (*rs).actual=(*rs).actual->siguiente;
@@ -84,6 +83,7 @@ int localizarRS(char cod[], RS *rs, int *pos, int accion){
 
         return 0;
     }else{
+        auxcost++;
         if(accion == 1){
             auxcost++;
         }

@@ -40,7 +40,6 @@ int hashingRAC(char *x){
     return (contador % RAC_FACTOR);
 }
 
-
 int localizarRAC(char cod[], RAC *rac, int *pos, int accion){
     int auxcost = 0;
 	int i = hashingRAC(cod);
@@ -48,7 +47,7 @@ int localizarRAC(char cod[], RAC *rac, int *pos, int accion){
 	int k = 0;
 	int iteraciones = 0;//controla si vi o no todas las M celdas
 
-	while((iteraciones < RAC_FACTOR) && ((*rac).estructura[i].isVirgen != -1) && strcmp(cod,(*rac).estructura[i].env.codigo)!=0){
+	while((iteraciones < RAC_FACTOR) && ((*rac).estructura[i].isVirgen != -1) && !((*rac).estructura[i].isVirgen == 1 && strcmp(cod,(*rac).estructura[i].env.codigo)==0)){
         if((*rac).estructura[i].isVirgen == 0 && bandera == -1){
             bandera = i;
         }
@@ -59,7 +58,7 @@ int localizarRAC(char cod[], RAC *rac, int *pos, int accion){
 		i = (i+k) % RAC_FACTOR;
         iteraciones++;
 	}
-	if(strcmp(cod,(*rac).estructura[i].env.codigo)==0){
+	if((*rac).estructura[i].isVirgen == 1 && strcmp(cod,(*rac).estructura[i].env.codigo)==0){
 	    if(accion == 1){
             auxcost++;
         }
@@ -91,6 +90,7 @@ int localizarRAC(char cod[], RAC *rac, int *pos, int accion){
             (*pos) = i;
             return 0;
         }else if((*rac).estructura[i].isVirgen != -1 && bandera == -1){
+            (*pos) = i;
             return -1;//la estructura esta llena
         }
 
@@ -114,7 +114,7 @@ int altaRAC(RAC *rac,envio env){
 int bajaRAC(RAC *rac,envio env){
     int pos = 0;
     int exito = localizarRAC(env.codigo,rac,&pos,0);
-    if(exito == 0){
+    if(exito != 1 ){
         return 0;
     }else{
         if(strcmpi((*rac).estructura[pos].env.codigo,env.codigo)==0 && strcmpi((*rac).estructura[pos].env.nomyapeRemi,env.nomyapeRemi)==0 && strcmpi((*rac).estructura[pos].env.nomyapeRece,env.nomyapeRece)==0 &&

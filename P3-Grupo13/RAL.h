@@ -42,12 +42,12 @@ int hashingRAL(char *x){
 }
 
 int localizarRAL(char cod[], RAL *ral, int *pos, int accion){
-    int auxcost;
+    int auxcost=0;
 	int i = hashingRAL(cod);
 	int bandera = -1;
 	int iteraciones = 0;//controla si vi o no todas las M celdas
 
-	while((iteraciones < RAL_FACTOR) && ((*ral).estructura[i].isVirgen != -1) && strcmp(cod,(*ral).estructura[i].env.codigo)!=0){
+	while((iteraciones < RAL_FACTOR) && ((*ral).estructura[i].isVirgen != -1) && !((*ral).estructura[i].isVirgen == 1 && strcmp(cod,(*ral).estructura[i].env.codigo)==0)){
         if((*ral).estructura[i].isVirgen == 0 && bandera == -1){
             bandera = i;
         }
@@ -59,7 +59,7 @@ int localizarRAL(char cod[], RAL *ral, int *pos, int accion){
         iteraciones++;
 	}
 
-	if(strcmp(cod,(*ral).estructura[i].env.codigo)==0){
+	if((*ral).estructura[i].isVirgen == 1 && strcmp(cod,(*ral).estructura[i].env.codigo)==0){
         if(accion == 1){
             auxcost++;
         }
@@ -89,6 +89,7 @@ int localizarRAL(char cod[], RAL *ral, int *pos, int accion){
         }else if((*ral).estructura[i].isVirgen == -1){
             (*pos) = i;
         }else if((*ral).estructura[i].isVirgen != -1 && bandera == -1){
+            (*pos) = i;
             return -1;//la estructura esta llena
         }
         return 0;
@@ -112,7 +113,7 @@ int altaRAL(RAL *ral,envio env){
 int bajaRAL(RAL *ral,envio env){
     int pos = 0;
     int exito = localizarRAL(env.codigo,ral,&pos,0);
-    if(exito == 0){
+    if(exito == 0 || exito==-1){
         return 0;
     }else{
         if(strcmpi((*ral).estructura[pos].env.codigo,env.codigo)==0 && strcmpi((*ral).estructura[pos].env.nomyapeRemi,env.nomyapeRemi)==0 && strcmpi((*ral).estructura[pos].env.nomyapeRece,env.nomyapeRece)==0 &&

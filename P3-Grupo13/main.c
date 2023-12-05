@@ -13,21 +13,20 @@
  ----------------------------------------------------------------------------------------
        | Max. Evocar Exito | Med. Evocar Exito | Max Evocar Fracaso | Med Evocar Fracaso|
  ----------------------------------------------------------------------------------------
-  RAL  |       12.00       |       3.40        |        19.00       |        7.43       |
+  RAL  |       6.00        |       1.68        |        9.00        |        3.87       |
  ----------------------------------------------------------------------------------------
   RAC  |        7.00       |       1.72        |        11.00       |        3.56       |
  ----------------------------------------------------------------------------------------
-  RS   |        5.00       |       2.29        |        5.00        |        2.38       |
+  RS   |        5.00       |       2.29        |        4.00        |        1.38       |
  ----------------------------------------------------------------------------------------
 Considerando las estructuras seleccionadas en esta ocasión y teniendo los resultados reflejados en nuestra tabla, podemos afirmar que,
 en términos de costos en función de las celdas consultadas, la mejor opción para abordar este problema es el Rebalse Separado, ya que
 presenta costos significativamente más bajos en comparación con las demás alternativas.
 
-Es evidente que el Rebalse Abierto Cuadrático constituiría una excelente segunda opción, dado que sus costos son inferiores a los del
-Rebalse Abierto Lineal. Por lo tanto, esta última estructura se posiciona como la menos eficiente para evocar elementos en nuestro
+Es evidente que el Rebalse Abierto Lineal constituiría una excelente segunda opción, dado que sus costos son inferiores a los del
+Rebalse Abierto Cuadratico. Por lo tanto, esta última estructura se posiciona como la menos eficiente para evocar elementos en nuestro
 problema.
- */
-
+*/
 int main(){
     int opcMenuOp;
     RAC rac;
@@ -98,7 +97,7 @@ void comparacion(RAC rac,RAL ral,RS rs){
         printf(" ---------------------------------------------------------------------------------------- \n");
         printf("       | Max. Evocar Exito | Med. Evocar Exito | Max Evocar Fracaso | Med Evocar Fracaso|\n");
         printf(" ---------------------------------------------------------------------------------------- \n");
-        printf("  RAL  |       %.2f       |       %.2f        |        %.2f       |        %.2f       |\n",maxRALEvocEx,(costRALEvocEx/cantRALEvocEx),maxRALEvocFr,(costRALEvocFr/cantRALEvocFr));
+        printf("  RAL  |       %.2f        |       %.2f        |        %.2f        |        %.2f       |\n",maxRALEvocEx,(costRALEvocEx/cantRALEvocEx),maxRALEvocFr,(costRALEvocFr/cantRALEvocFr));
         printf(" ---------------------------------------------------------------------------------------- \n");
         printf("  RAC  |        %.2f       |       %.2f        |        %.2f       |        %.2f       |\n",maxRACEvocEx,(costRACEvocEx/cantRACEvocEx),maxRACEvocFr,(costRACEvocFr/cantRACEvocFr));
         printf(" ---------------------------------------------------------------------------------------- \n");
@@ -118,7 +117,6 @@ void memorizacionPrevia(RAC *rac, RAL *ral, RS *rs){
     }else{
         while (!(feof(fp))){
             fscanf(fp,"%d",&accion);
-            printf("%d",accion);
             fscanf(fp," %[^\n]s",env.codigo);
             if(accion==1 || accion==2){
                 fscanf(fp," %ld",&env.documentoRece);
